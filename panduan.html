@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Alat Peraga Matematika</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { background: transparent; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- Float untuk Opsi -->
+    <div id="opsiFloat" class="bg-white/95 backdrop-blur-sm p-8 rounded-2xl shadow-2xl max-w-lg w-full transform scale-100 transition-transform duration-300">
+        <h4 class="font-bold text-2xl text-gray-800 mb-6">Pilih Materi</h4>
+        <ul class="space-y-3">
+            <li><button class="opsiBtn w-full text-left py-3 px-4 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-lg hover:from-yellow-200 hover:to-amber-200 text-amber-900 font-medium shadow-sm hover:shadow-md transition-all duration-200" data-materi="kpk">KPK (Kelipatan Persekutuan Terkecil)</button></li>
+            <li><button class="opsiBtn w-full text-left py-3 px-4 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-lg hover:from-yellow-200 hover:to-amber-200 text-amber-900 font-medium shadow-sm hover:shadow-md transition-all duration-200" data-materi="fpb">FPB (Faktor Persekutuan Terbesar)</button></li>
+            <li><button class="opsiBtn w-full text-left py-3 px-4 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-lg hover:from-yellow-200 hover:to-amber-200 text-amber-900 font-medium shadow-sm hover:shadow-md transition-all duration-200" data-materi="baris-aritmatika">Baris Aritmatika</button></li>
+            <li><button class="opsiBtn w-full text-left py-3 px-4 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-lg hover:from-yellow-200 hover:to-amber-200 text-amber-900 font-medium shadow-sm hover:shadow-md transition-all duration-200" data-materi="deret-aritmatika">Deret Aritmatika</button></li>
+            <li><button class="opsiBtn w-full text-left py-3 px-4 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-lg hover:from-yellow-200 hover:to-amber-200 text-amber-900 font-medium shadow-sm hover:shadow-md transition-all duration-200" data-materi="baris-geometri">Baris Geometri</button></li>
+            <li><button class="opsiBtn w-full text-left py-3 px-4 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-lg hover:from-yellow-200 hover:to-amber-200 text-amber-900 font-medium shadow-sm hover:shadow-md transition-all duration-200" data-materi="deret-geometri">Deret Geometri</button></li>
+        </ul>
+    </div>
+
+    <!-- Float untuk Panduan Spesifik -->
+    <div id="panduanFloat" class="hidden bg-white/95 backdrop-blur-sm p-8 pt-12 rounded-2xl shadow-2xl max-w-lg w-full max-h-[60vh] overflow-y-auto transform scale-95 transition-transform duration-300 relative">
+        <button id="kembaliBtn" class="absolute top-4 left-4 text-gray-700 hover:text-gray-900 transition p-2 rounded-full hover:bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <h4 id="panduanTitle" class="font-bold text-2xl text-gray-800 mb-6"></h4>
+        <ul id="panduanContent" class="text-gray-600 space-y-3 text-base"></ul>
+    </div>
+
+    <script>
+        const panduanData = {
+            kpk: {
+                title: "Cara Bermain: KPK (Kelipatan Persekutuan Terkecil)",
+                steps: [
+                    "1. Diberikan soal, misalnya: Carilah KPK dari 2 dan 6.",
+                    "2. Tentukan kelipatan bilangan mana yang ditandai cakram merah dan hijau...",
+                    "3. Tentukan kelipatan masing-masing bilangan...",
+                    "4. Klik dan seret cakram...",
+                    "5. Cakram akan otomatis bertambah...",
+                    "6. Identifikasi cagak yang berisi cakram merah dan hijau...",
+                    "7. KPK adalah kelipatan persekutuan terkecil..."
+                ]
+            },
+            fpb: {
+                title: "Cara Bermain: FPB (Faktor Persekutuan Terbesar)",
+                steps: [
+                    "1. Diberikan soal, misalnya: Carilah FPB dari 2 dan 6.",
+                    "2. Tentukan faktor bilangan...",
+                    "3. Tentukan faktor masing-masing bilangan...",
+                    "4. Klik dan seret cakram...",
+                    "5. Cakram akan otomatis bertambah...",
+                    "6. Identifikasi cagak yang berisi cakram merah dan hijau...",
+                    "7. FPB adalah faktor persekutuan terbesar..."
+                ]
+            },
+            'baris-aritmatika': {
+                title: "Cara Bermain: Baris Aritmatika",
+                steps: [
+                    "1. Diberikan soal...",
+                    "2. Tentukan cakram merah dan hijau...",
+                    "3. Klik dan seret cakram...",
+                    "4. Untuk cagak 2...",
+                    "5. Lanjutkan untuk cagak 3...",
+                    "6. Perhatikan pola...",
+                    "7. Rumus suku ke-n adalah..."
+                ]
+            },
+            'deret-aritmatika': {
+                title: "Cara Bermain: Deret Aritmatika",
+                steps: [
+                    "1. Diberikan soal...",
+                    "2. Tentukan cakram merah dan hijau...",
+                    "3. Pada baris 1 dan 2...",
+                    "4. Untuk cagak 2...",
+                    "5. Lanjutkan untuk cagak 3...",
+                    "6. Perhatikan pola...",
+                    "7. Jumlahkan dan hitung Sn..."
+                ]
+            },
+            'baris-geometri': {
+                title: "Cara Bermain: Baris Geometri",
+                steps: [
+                    "1. Diberikan soal...",
+                    "2. Tentukan cakram merah dan hijau...",
+                    "3. Klik dan seret cakram...",
+                    "4. Untuk cagak 2...",
+                    "5. Lanjutkan untuk cagak 3...",
+                    "6. Perhatikan pola...",
+                    "7. Rumus suku ke-n adalah..."
+                ]
+            },
+            'deret-geometri': {
+                title: "Cara Bermain: Deret Geometri",
+                steps: [
+                    "1. Diberikan soal...",
+                    "2. Tentukan cakram merah dan hijau...",
+                    "3. Pada baris 1...",
+                    "4. Untuk baris 1 cagak 2...",
+                    "5. Lanjutkan untuk baris 1...",
+                    "6. Pada baris 2...",
+                    "7. Kurangkan baris 2...",
+                    "8. Rumus Sn adalah..."
+                ]
+            }
+        };
+
+        document.querySelectorAll('.opsiBtn').forEach(button => {
+            button.addEventListener('click', () => {
+                const materi = button.getAttribute('data-materi');
+                const panduan = panduanData[materi];
+                document.getElementById('panduanTitle').textContent = panduan.title;
+                const panduanContent = document.getElementById('panduanContent');
+                panduanContent.innerHTML = '';
+                panduan.steps.forEach(step => {
+                    const li = document.createElement('li');
+                    li.classList.add('flex', 'items-start', 'gap-2');
+                    li.innerHTML = `<span class="text-amber-600 font-semibold">•</span> ${step}`;
+                    panduanContent.appendChild(li);
+                });
+                document.getElementById('opsiFloat').classList.add('hidden');
+                const panduanFloat = document.getElementById('panduanFloat');
+                panduanFloat.classList.remove('hidden');
+                panduanFloat.classList.add('opacity-100');
+                panduanFloat.classList.remove('scale-95');
+                panduanFloat.classList.add('scale-100');
+            });
+        });
+
+        document.getElementById('kembaliBtn').addEventListener('click', () => {
+            const panduanFloat = document.getElementById('panduanFloat');
+            panduanFloat.classList.remove('opacity-100');
+            panduanFloat.classList.add('hidden');
+            panduanFloat.classList.remove('scale-100');
+            panduanFloat.classList.add('scale-95');
+            document.getElementById('opsiFloat').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
