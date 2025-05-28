@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Cagak 3D dengan Keranjang Ring</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <link rel="stylesheet" href="style/alper.css">
+
+</head>
+<body class="bg-gray-100 overflow-hidden">
+    <div id="container" class="absolute inset-0"></div>
+    
+    <!-- Controls -->
+    <div class="absolute top-5 left-5 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-lg z-50">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">Kontrol</h2>
+        <button id="clearAll" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-medium">
+            Hapus Semua Ring
+        </button>
+    </div>
+    
+    <!-- Basket -->
+    <div class="absolute right-5 top-1/2 transform -translate-y-1/2 w-48 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-4 z-50">
+        <h3 class="text-lg font-bold text-gray-800 mb-3 text-center">Keranjang Ring</h3>
+        <div id="basket-content" class="border-2 border-dashed border-gray-300 rounded-lg p-3 min-h-80 max-h-80 overflow-y-auto space-y-2">
+            <!-- Rings will be added here -->
+        </div>
+    </div>
+    
+    <!-- Instructions -->
+    <div class="absolute bottom-5 left-5 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-lg max-w-xs z-50">
+        <h4 class="font-bold text-gray-800 mb-2">Cara Bermain:</h4>
+        <ul class="text-sm text-gray-600 space-y-1">
+            <li>1. Klik dan seret ring dari keranjang</li>
+            <li>2. Lepaskan ring di atas cagak yang diinginkan</li>
+            <li>3. Ring akan otomatis bertambah di keranjang</li>
+        </ul>
+    </div>
+
+   <script src="js/alper.js"></script>
+</body>
+</html>

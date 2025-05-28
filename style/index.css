@@ -1,0 +1,80 @@
+
+        .wooden-bg {
+            background: linear-gradient(135deg, #D2691E 0%, #CD853F 50%, #DEB887 100%);
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(139,69,19,0.1) 35px, rgba(139,69,19,0.1) 40px),
+                repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(139,69,19,0.1) 35px, rgba(139,69,19,0.1) 40px);
+        }
+        
+        .ring-3d {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: ring-spin 8s linear infinite;
+        }
+        
+        .ring-red {
+            background: radial-gradient(ellipse at center, #ff6b6b 20%, #e63946 40%, #dc2626 60%);
+            box-shadow: 
+                inset -10px -10px 20px rgba(0,0,0,0.3),
+                inset 10px 10px 20px rgba(255,255,255,0.2),
+                0 0 30px rgba(255,107,107,0.6);
+        }
+        
+        .ring-green {
+            background: radial-gradient(ellipse at center, #51cf66 20%, #37b24d 40%, #16a34a 60%);
+            box-shadow: 
+                inset -10px -10px 20px rgba(0,0,0,0.3),
+                inset 10px 10px 20px rgba(255,255,255,0.2),
+                0 0 30px rgba(81,207,102,0.6);
+        }
+        
+        .ring-3d::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            background: transparent;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.7);
+        }
+        
+        .ring-3d::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 20px;
+            width: 20px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.8);
+            filter: blur(3px);
+        }
+        
+        .pole-3d {
+            width: 12px;
+            height: 120px;
+            background: linear-gradient(to right, #8B4513, #CD853F, #8B4513);
+            border-radius: 6px;
+            position: relative;
+            box-shadow: 
+                -4px 0 8px rgba(0,0,0,0.3),
+                4px 0 8px rgba(255,255,255,0.1);
+        }
+        
+        .pole-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 2px;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0.3), transparent);
+            border-radius: 4px;
+        }
+   
