@@ -37,80 +37,80 @@
 
     <script>
         const panduanData = {
-            kpk: {
-                title: "Cara Bermain: KPK (Kelipatan Persekutuan Terkecil)",
-                steps: [
-                    "1. Diberikan soal, misalnya: Carilah KPK dari 2 dan 6.",
-                    "2. Tentukan kelipatan bilangan mana yang ditandai cakram merah dan hijau...",
-                    "3. Tentukan kelipatan masing-masing bilangan...",
-                    "4. Klik dan seret cakram...",
-                    "5. Cakram akan otomatis bertambah...",
-                    "6. Identifikasi cagak yang berisi cakram merah dan hijau...",
-                    "7. KPK adalah kelipatan persekutuan terkecil..."
-                ]
-            },
-            fpb: {
-                title: "Cara Bermain: FPB (Faktor Persekutuan Terbesar)",
-                steps: [
-                    "1. Diberikan soal, misalnya: Carilah FPB dari 2 dan 6.",
-                    "2. Tentukan faktor bilangan...",
-                    "3. Tentukan faktor masing-masing bilangan...",
-                    "4. Klik dan seret cakram...",
-                    "5. Cakram akan otomatis bertambah...",
-                    "6. Identifikasi cagak yang berisi cakram merah dan hijau...",
-                    "7. FPB adalah faktor persekutuan terbesar..."
-                ]
-            },
-            'baris-aritmatika': {
-                title: "Cara Bermain: Baris Aritmatika",
-                steps: [
-                    "1. Diberikan soal...",
-                    "2. Tentukan cakram merah dan hijau...",
-                    "3. Klik dan seret cakram...",
-                    "4. Untuk cagak 2...",
-                    "5. Lanjutkan untuk cagak 3...",
-                    "6. Perhatikan pola...",
-                    "7. Rumus suku ke-n adalah..."
-                ]
-            },
-            'deret-aritmatika': {
-                title: "Cara Bermain: Deret Aritmatika",
-                steps: [
-                    "1. Diberikan soal...",
-                    "2. Tentukan cakram merah dan hijau...",
-                    "3. Pada baris 1 dan 2...",
-                    "4. Untuk cagak 2...",
-                    "5. Lanjutkan untuk cagak 3...",
-                    "6. Perhatikan pola...",
-                    "7. Jumlahkan dan hitung Sn..."
-                ]
-            },
-            'baris-geometri': {
-                title: "Cara Bermain: Baris Geometri",
-                steps: [
-                    "1. Diberikan soal...",
-                    "2. Tentukan cakram merah dan hijau...",
-                    "3. Klik dan seret cakram...",
-                    "4. Untuk cagak 2...",
-                    "5. Lanjutkan untuk cagak 3...",
-                    "6. Perhatikan pola...",
-                    "7. Rumus suku ke-n adalah..."
-                ]
-            },
-            'deret-geometri': {
-                title: "Cara Bermain: Deret Geometri",
-                steps: [
-                    "1. Diberikan soal...",
-                    "2. Tentukan cakram merah dan hijau...",
-                    "3. Pada baris 1...",
-                    "4. Untuk baris 1 cagak 2...",
-                    "5. Lanjutkan untuk baris 1...",
-                    "6. Pada baris 2...",
-                    "7. Kurangkan baris 2...",
-                    "8. Rumus Sn adalah..."
-                ]
-            }
-        };
+    kpk: {
+        title: "Cara Bermain: KPK (Kelipatan Persekutuan Terkecil)",
+        steps: [
+            "1. Diberikan soal, misalnya: Carilah KPK dari 2 dan 6.",
+            "2. Tentukan kelipatan bilangan mana yang ditandai cakram merah dan hijau. Contoh: Merah untuk kelipatan 2, hijau untuk kelipatan 6.",
+            "3. Tentukan kelipatan masing-masing bilangan. Contoh: Kelipatan 2: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30. Kelipatan 6: 6, 12, 18, 24.",
+            "4. Klik dan seret cakram ke batang bernomor sesuai kelipatan yang ditentukan. Contoh: Cakram merah untuk kelipatan 2, cakram hijau untuk kelipatan 6.",
+            "5. Cakram akan otomatis bertambah pada batang yang sesuai dengan kelipatan masing-masing bilangan.",
+            "6. Identifikasi batang yang berisi cakram merah dan hijau sekaligus sebagai kelipatan persekutuan. Contoh: Batang dengan angka 6, 12, 18, 24.",
+            "7. KPK adalah kelipatan persekutuan terkecil. Contoh: KPK dari 2 dan 6 adalah 6."
+        ]
+    },
+    fpb: {
+        title: "Cara Bermain: FPB (Faktor Persekutuan Terbesar)",
+        steps: [
+            "1. Diberikan soal, misalnya: Carilah FPB dari 2 dan 6.",
+            "2. Tentukan faktor bilangan mana yang ditandai cakram merah dan hijau. Contoh: Merah untuk faktor 2, hijau untuk faktor 6.",
+            "3. Tentukan faktor masing-masing bilangan. Contoh: Faktor 2: 1, 2. Faktor 6: 1, 2, 3, 6.",
+            "4. Klik dan seret cakram ke batang bernomor sesuai faktor yang ditentukan. Contoh: Cakram merah untuk faktor 2, cakram hijau untuk faktor 6.",
+            "5. Cakram akan otomatis bertambah pada batang yang sesuai dengan faktor masing-masing bilangan.",
+            "6. Identifikasi batang yang berisi cakram merah dan hijau sekaligus sebagai faktor persekutuan. Contoh: Batang dengan angka 1, 2.",
+            "7. FPB adalah faktor persekutuan terbesar. Contoh: FPB dari 2 dan 6 adalah 2."
+        ]
+    },
+    'baris-aritmatika': {
+        title: "Cara Bermain: Baris Aritmatika",
+        steps: [
+            "1. Diberikan soal, misalnya: Tentukan rumus suku ke-n dari baris aritmatika 1, 3, 5, 7, 9.",
+            "2. Tentukan cakram merah dan hijau. Contoh: Merah untuk suku pertama (1), hijau untuk beda (2). Angka batang menunjukkan suku ke-n.",
+            "3. Klik dan seret cakram merah sebanyak suku pertama ke batang 1. Contoh: Satu cakram merah ke batang 1.",
+            "4. Untuk batang 2, seret cakram merah sebanyak suku pertama ditambah cakram hijau hingga total cakram sesuai suku kedua. Contoh: Satu cakram merah dan dua cakram hijau (total 3) ke batang 2.",
+            "5. Lanjutkan untuk batang 3 dan seterusnya, tambah cakram hijau sesuai beda (2) untuk setiap suku berikutnya.",
+            "6. Perhatikan pola cakram hijau (beda). Contoh: Beda tetap 2 untuk setiap suku (suku ke-2: 2, suku ke-3: 2, dst.).",
+            "7. Rumus suku ke-n adalah Un = a + (n-1)b. Contoh: Un = 1 + (n-1)·2 = 2n - 1."
+        ]
+    },
+    'deret-aritmatika': {
+        title: "Cara Bermain: Deret Aritmatika",
+        steps: [
+            "1. Diberikan soal, misalnya: Tentukan rumus jumlah suku ke-n dari deret aritmatika 1 + 3 + 5 + 7 + 9.",
+            "2. Tentukan cakram merah dan hijau. Contoh: Merah untuk suku pertama (1), hijau untuk beda (2). Angka batang menunjukkan suku ke-n.",
+            "3. Pada baris 1 dan 2, seret cakram merah sebanyak suku pertama ke batang 1. Contoh: Satu cakram merah ke batang 1 pada kedua baris.",
+            "4. Untuk batang 2, seret cakram merah sebanyak suku pertama ditambah cakram hijau hingga total cakram sesuai suku kedua. Contoh: Satu cakram merah dan dua cakram hijau (total 3) ke batang 2 pada kedua baris.",
+            "5. Lanjutkan untuk batang 3 dan seterusnya, tambah cakram hijau sesuai beda (2) untuk setiap suku berikutnya.",
+            "6. Perhatikan pola cakram hijau pada baris 1. Contoh: Beda 2, 2·2, 2·3, 2·4 untuk suku ke-2, 3, 4, 5.",
+            "7. Jumlahkan baris 1 dan 2, hitung Sn. Contoh: Sn = n/2·(2a + (n-1)b) = n/2·(2·1 + (n-1)·2) = n·(n + 1)."
+        ]
+    },
+    'baris-geometri': {
+        title: "Cara Bermain: Baris Geometri",
+        steps: [
+            "1. Diberikan soal, misalnya: Tentukan rumus suku ke-n dari baris geometri 1, 2, 4, 8.",
+            "2. Tentukan cakram merah dan hijau. Contoh: Merah untuk suku pertama dan suku sebelumnya, hijau untuk rasio (2). Angka batang menunjukkan suku ke-n.",
+            "3. Klik dan seret cakram merah sebanyak suku pertama ke batang 1. Contoh: Satu cakram merah ke batang 1.",
+            "4. Untuk batang 2, seret cakram merah sebanyak suku sebelumnya ditambah cakram hijau hingga total cakram sesuai suku kedua. Contoh: Satu cakram merah dan satu cakram hijau (total 2) ke batang 2.",
+            "5. Lanjutkan untuk batang 3 dan seterusnya, tambah cakram hijau sesuai rasio (2) untuk setiap suku berikutnya.",
+            "6. Perhatikan pola cakram hijau (rasio). Contoh: Suku ke-2: 1 hijau, suku ke-3: 2 hijau (2·1), suku ke-4: 4 hijau (2·2·1), rasio = 2.",
+            "7. Rumus suku ke-n adalah Un = a·r^(n-1). Contoh: Un = 1·2^(n-1) = 2^(n-1)."
+        ]
+    },
+    'deret-geometri': {
+        title: "Cara Bermain: Deret Geometri",
+        steps: [
+            "1. Diberikan soal, misalnya: Tentukan rumus jumlah suku ke-n dari deret geometri 1 + 2 + 4 dengan rasio 2.",
+            "2. Tentukan cakram merah dan hijau. Contoh: Merah untuk suku pertama dan suku sebelumnya, hijau untuk rasio (2). Angka batang menunjukkan suku ke-n.",
+            "3. Pada baris 1 batang 1, seret cakram merah sebanyak suku pertama. Contoh: Satu cakram merah ke batang 1.",
+            "4. Untuk baris 1 batang 2, seret cakram merah sebanyak suku sebelumnya ditambah cakram hijau hingga total cakram sesuai suku ke-2. Contoh: Satu cakram merah dan satu cakram hijau (total 2).",
+            "5. Lanjutkan untuk baris 1 batang 3 dan seterusnya, tambah cakram hijau sesuai rasio (2).",
+            "6. Pada baris 2 batang 1, seret cakram merah sebanyak suku pertama, tambah cakram hijau hingga total r·suku pertama. Contoh: Satu cakram merah dan satu cakram hijau (total 2).",
+            "7. Kurangkan baris 2 dengan baris 1, selesaikan hingga hanya tersisa a(r^n - 1)/(r - 1). Contoh: Sn = 1·(2^n - 1)/(2 - 1) = 2^n - 1.",
+            "8. Rumus Sn adalah Sn = a(1 - r^n)/(1 - r) untuk r ≠ 1. Contoh: Sn = 1·(1 - 2^n)/(1 - 2) = 2^n - 1."
+        ]
+    }
+}
 
         document.querySelectorAll('.opsiBtn').forEach(button => {
             button.addEventListener('click', () => {
