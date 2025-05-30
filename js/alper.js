@@ -1,6 +1,6 @@
 // Inisialisasi scene Three.js
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xf0f0f0);
+scene.background = new THREE.Color(0x2f2f2f);
 
 // Setup kamera
 const camera = new THREE.PerspectiveCamera(
@@ -28,7 +28,7 @@ controls.dampingFactor = 0.05;
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
 scene.add(ambientLight);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
 directionalLight.position.set(10, 20, 10);
 directionalLight.castShadow = true;
 directionalLight.shadow.mapSize.width = 2048;
@@ -47,7 +47,7 @@ scene.add(poleGroup);
 // Buat lantai
 const floorGeometry = new THREE.PlaneGeometry(60, 60);
 const floorMaterial = new THREE.MeshStandardMaterial({
-  color: 0xdddddd,
+  color: 0x2f2f2f, // Warna lantai disesuaikan dengan background
   roughness: 0.8,
 });
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
@@ -68,103 +68,199 @@ const mouse = new THREE.Vector2();
 let mouseDown = false;
 
 function createWoodenBoard() {
-  const boardGeometry = new THREE.BoxGeometry(25, 0.8, 40);
+  // Create main board with rounded edges
+  const boardGeometry = new THREE.BoxGeometry(25, 1.2, 40);
+  
+  // Enhanced wood texture with more realistic grain
   const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 512;
+  canvas.width = 1024;
+  canvas.height = 1024;
   const ctx = canvas.getContext("2d");
 
-  ctx.fillStyle = "#D8A15E";
-  ctx.fillRect(0, 0, 512, 512);
+  // Base wood color - warmer brown
+  const gradient = ctx.createLinearGradient(0, 0, 1024, 1024);
+  gradient.addColorStop(0, "#CD853F"); // Sandy brown
+  gradient.addColorStop(0.3, "#DEB887"); // Burlywood
+  gradient.addColorStop(0.6, "#D2B48C"); // Tan
+  gradient.addColorStop(1, "#BC9A6A"); // Darker tan
+  
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 1024, 1024);
 
+  // Add wood grain pattern
   ctx.strokeStyle = "#8B4513";
-  ctx.lineWidth = 2;
-  for (let i = 0; i < 40; i++) {
+  ctx.lineWidth = 3;
+  for (let i = 0; i < 60; i++) {
+    const y = i * 17;
     ctx.beginPath();
-    ctx.moveTo(0, i * 51.2);
-    ctx.lineTo(512, i * 51.2 + Math.random() * 20 - 10);
+    ctx.moveTo(0, y);
+    
+    // Create wavy wood grain lines
+    for (let x = 0; x <= 1024; x += 20) {
+      const waveY = y + Math.sin(x * 0.01) * 8 + Math.random() * 6 - 3;
+      ctx.lineTo(x, waveY);
+    }
     ctx.stroke();
   }
 
+  // Add wood knots and texture details
+  ctx.fillStyle = "rgba(139, 69, 19, 0.4)";
+  for (let i = 0; i < 15; i++) {
+    const x = Math.random() * 1024;
+    const y = Math.random() * 1024;
+    const radius = Math.random() * 20 + 10;
+    
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
   const woodTexture = new THREE.CanvasTexture(canvas);
+  woodTexture.wrapS = THREE.RepeatWrapping;
+  woodTexture.wrapT = THREE.RepeatWrapping;
+  woodTexture.repeat.set(2, 3);
+
+  // Enhanced board material with better lighting response
   const boardMaterial = new THREE.MeshStandardMaterial({
     map: woodTexture,
-    color: 0xd2691e,
+    color: 0xDEB887,
+    roughness: 0.8,
+    metalness: 0.1,
+    bumpMap: woodTexture,
+    bumpScale: 0.3
   });
 
   const board = new THREE.Mesh(boardGeometry, boardMaterial);
-  board.position.set(0, 0.4, 0);
+  board.position.set(0, 0.6, 0);
   board.castShadow = true;
+  board.receiveShadow = true;
   scene.add(board);
 
-  // Teks papan dengan efek 3D yang lebih besar
-  const textCanvas = document.createElement("canvas");
-  textCanvas.width = 2048; // Diperbesar untuk resolusi lebih tinggi
-  textCanvas.height = 512;
-  const textCtx = textCanvas.getContext("2d");
-
-  // Background transparan
-  textCtx.clearRect(0, 0, 2048, 512);
-
-  // Font yang lebih besar dan tebal
-  textCtx.font = "Bold 180px Arial";
-  textCtx.textAlign = "center";
-  textCtx.textBaseline = "middle";
-
-  // Efek bayangan 3D (shadow layers)
-  const shadowOffsets = [
-    { x: 8, y: 8, color: "#1A1A1A" },
-    { x: 6, y: 6, color: "#2A2A2A" },
-    { x: 4, y: 4, color: "#3A3A3A" },
-    { x: 2, y: 2, color: "#4A4A4A" }
-  ];
-
-  // Gambar bayangan berlapis untuk efek 3D
-  shadowOffsets.forEach(shadow => {
-    textCtx.fillStyle = shadow.color;
-    textCtx.fillText("MENARA BILANGAN", 1024 + shadow.x, 256 + shadow.y);
+  // Add decorative border/frame
+  const frameGeometry = new THREE.BoxGeometry(27, 0.4, 42);
+  const frameMaterial = new THREE.MeshStandardMaterial({
+    color: 0x8B4513,
+    roughness: 0.6,
+    metalness: 0.2
   });
+  
+  const frame = new THREE.Mesh(frameGeometry, frameMaterial);
+  frame.position.set(0, 0.2, 0);
+  frame.castShadow = true;
+  frame.receiveShadow = true;
+  scene.add(frame);
 
-  // Outline hitam tebal
-  textCtx.strokeStyle = "#000000";
-  textCtx.lineWidth = 8;
-  textCtx.strokeText("MENARA BILANGAN", 1024, 256);
+  // Load font for 3D text with enhanced effects
+  const fontLoader = new THREE.FontLoader();
+  fontLoader.load(
+    'https://threejs.org/examples/fonts/helvetiker_bold.typeface.json',
+    (font) => {
+      // Create "BILANGAN" text (top)
+      const bilanganGeometry = new THREE.TextGeometry("BILANGAN", {
+        font: font,
+        size: 2.2,
+        height: 0.6,
+        curveSegments: 16,
+        bevelEnabled: true,
+        bevelThickness: 0.12,
+        bevelSize: 0.08,
+        bevelOffset: 0,
+        bevelSegments: 8
+      });
 
-  // Gradient fill untuk efek logam/emas
-  const gradient = textCtx.createLinearGradient(0, 200, 0, 312);
-  gradient.addColorStop(0, "#FFD700"); // Emas terang
-  gradient.addColorStop(0.3, "#FFA500"); // Orange emas
-  gradient.addColorStop(0.7, "#FF8C00"); // Orange gelap
-  gradient.addColorStop(1, "#DAA520"); // Emas gelap
+      // Center "BILANGAN"
+      bilanganGeometry.computeBoundingBox();
+      const bilanganWidth = bilanganGeometry.boundingBox.max.x - bilanganGeometry.boundingBox.min.x;
+      bilanganGeometry.translate(-bilanganWidth / 2, 0, 0);
 
-  textCtx.fillStyle = gradient;
-  textCtx.fillText("MENARA BILANGAN", 1024, 256);
+      // Create "MENARA" text (bottom)
+      const menaraGeometry = new THREE.TextGeometry("MENARA", {
+        font: font,
+        size: 2.2,
+        height: 0.6,
+        curveSegments: 16,
+        bevelEnabled: true,
+        bevelThickness: 0.12,
+        bevelSize: 0.08,
+        bevelOffset: 0,
+        bevelSegments: 8
+      });
 
-  // Highlight putih di bagian atas untuk efek mengkilap
-  textCtx.strokeStyle = "#FFFFFF";
-  textCtx.lineWidth = 3;
-  textCtx.globalCompositeOperation = "overlay";
-  textCtx.strokeText("MENARA BILANGAN", 1024, 246);
-  textCtx.globalCompositeOperation = "source-over";
+      // Center "MENARA"
+      menaraGeometry.computeBoundingBox();
+      const menaraWidth = menaraGeometry.boundingBox.max.x - menaraGeometry.boundingBox.min.x;
+      menaraGeometry.translate(-menaraWidth / 2, 0, 0);
 
-  const textTexture = new THREE.CanvasTexture(textCanvas);
-  textTexture.generateMipmaps = false;
-  textTexture.minFilter = THREE.LinearFilter;
-  textTexture.magFilter = THREE.LinearFilter;
+      // Enhanced materials with more subtle colors
+      const bilanganMaterial = new THREE.MeshStandardMaterial({
+        color: 0xCC5500, // More muted orange-red
+        metalness: 0.5,
+        roughness: 0.4,
+        emissive: 0x221100, // Subtle glow
+        emissiveIntensity: 0.05
+      });
 
-  const textMaterial = new THREE.MeshBasicMaterial({
-    map: textTexture,
-    transparent: true,
-    alphaTest: 0.1
-  });
+      const menaraMaterial = new THREE.MeshStandardMaterial({
+        color: 0xDAA520, // More muted gold (goldenrod)
+        metalness: 0.6,
+        roughness: 0.3,
+        emissive: 0x221100, // Subtle golden glow
+        emissiveIntensity: 0.08
+      });
 
-  // Geometri yang lebih besar untuk teks
-  const textGeometry = new THREE.PlaneGeometry(20, 5); // Diperbesar dari 12x3 ke 20x5
-  const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-  textMesh.position.set(0, 0.81, -16.5);
-  textMesh.rotation.x = -Math.PI / 2;
-  scene.add(textMesh);
+      // Create meshes with enhanced positioning
+      const bilanganMesh = new THREE.Mesh(bilanganGeometry, bilanganMaterial);
+      bilanganMesh.position.set(0, 1.3, -13.5); // Higher position for better visibility
+      bilanganMesh.rotation.x = -Math.PI / 2;
+      bilanganMesh.castShadow = true;
+      bilanganMesh.receiveShadow = true;
+      scene.add(bilanganMesh);
 
+      const menaraMesh = new THREE.Mesh(menaraGeometry, menaraMaterial);
+      menaraMesh.position.set(0, 1.3, -17); // Below "BILANGAN"
+      menaraMesh.rotation.x = -Math.PI / 2 ;
+      menaraMesh.castShadow = true;
+      menaraMesh.receiveShadow = true;
+      scene.add(menaraMesh);
+
+      // Add subtle animation to make text more dynamic
+      function animateText() {
+        const time = Date.now() * 0.001;
+        
+        // Subtle floating animation
+        bilanganMesh.position.y = 1.3 + Math.sin(time * 0.5) * 0.05 ;
+        menaraMesh.position.y = 1.3 + Math.sin(time * 0.5 + Math.PI) * 0.05 ;
+        
+        // Subtle color intensity variation with reduced intensity
+        bilanganMaterial.emissiveIntensity = 0.05 + Math.sin(time) * 0.02;
+        menaraMaterial.emissiveIntensity = 0.08 + Math.sin(time + Math.PI * 0.5) * 0.03;
+        
+        requestAnimationFrame(animateText);
+      }
+      animateText();
+
+    },
+    undefined,
+    (error) => {
+      console.error('Error loading font:', error);
+    }
+  );
+
+  // Add enhanced lighting for better 3D effect
+  const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
+  scene.add(ambientLight);
+
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  directionalLight.position.set(10, 10, 5);
+  directionalLight.castShadow = true;
+  directionalLight.shadow.mapSize.width = 2048;
+  directionalLight.shadow.mapSize.height = 2048;
+  scene.add(directionalLight);
+
+  // Add rim lighting for more dramatic effect
+  const rimLight = new THREE.DirectionalLight(0xffa500, 0.3);
+  rimLight.position.set(-10, 5, -5);
+  scene.add(rimLight);
 }
 function createPoleGrid() {
   const poleGeometry = new THREE.CylinderGeometry(0.4, 0.4, 6, 16);
