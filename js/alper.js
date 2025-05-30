@@ -175,11 +175,11 @@ function createPoleGrid() {
 
       // Background with a darker single color (deep burgundy)
       context.fillStyle = "#4A1A1A";
-      context.fillRect(0, 0, 120, 120);
+      context.fillRect(0, 0, 150, 150);
 
       // Border circle (soft gold for contrast)
       context.beginPath();
-      context.arc(60, 60, 54, 0, 2 * Math.PI); // Scaled radius (45 * 1.2)
+      context.arc(60, 60, 60, 0, 2 * Math.PI); // Scaled radius (45 * 1.2)
       context.strokeStyle = "#f1c40f";
       context.lineWidth = 3.6; // Scaled from 3 (proportional to canvas)
       context.stroke();
@@ -191,7 +191,7 @@ function createPoleGrid() {
       context.shadowOffsetY = 1.8; // Scaled from 1.5
 
       // Main text
-      context.font = "Bold 60px Helvetica"; // Scaled from 40px (proportional)
+      context.font = "Bold 100px Helvetica"; // Scaled from 40px (proportional)
       context.fillStyle = "#ffffff";
       context.strokeStyle = "#f39c12";
       context.lineWidth = 1.8; // Scaled from 1.5
