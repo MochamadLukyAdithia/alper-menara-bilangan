@@ -97,32 +97,74 @@ function createWoodenBoard() {
   board.castShadow = true;
   scene.add(board);
 
-  // Teks papan
+  // Teks papan dengan efek 3D yang lebih besar
   const textCanvas = document.createElement("canvas");
-  textCanvas.width = 1024;
-  textCanvas.height = 256;
+  textCanvas.width = 2048; // Diperbesar untuk resolusi lebih tinggi
+  textCanvas.height = 512;
   const textCtx = textCanvas.getContext("2d");
 
-  textCtx.font = "Bold 120px Arial";
-  textCtx.fillStyle = "white";
-  textCtx.strokeStyle = "#2A2A2A";
-  textCtx.lineWidth = 3;
+  // Background transparan
+  textCtx.clearRect(0, 0, 2048, 512);
+
+  // Font yang lebih besar dan tebal
+  textCtx.font = "Bold 180px Arial";
   textCtx.textAlign = "center";
   textCtx.textBaseline = "middle";
-  textCtx.strokeText("Menara Bilangan", 512, 128);
-  textCtx.fillText("Menara Bilangan", 512, 128);
+
+  // Efek bayangan 3D (shadow layers)
+  const shadowOffsets = [
+    { x: 8, y: 8, color: "#1A1A1A" },
+    { x: 6, y: 6, color: "#2A2A2A" },
+    { x: 4, y: 4, color: "#3A3A3A" },
+    { x: 2, y: 2, color: "#4A4A4A" }
+  ];
+
+  // Gambar bayangan berlapis untuk efek 3D
+  shadowOffsets.forEach(shadow => {
+    textCtx.fillStyle = shadow.color;
+    textCtx.fillText("MENARA BILANGAN", 1024 + shadow.x, 256 + shadow.y);
+  });
+
+  // Outline hitam tebal
+  textCtx.strokeStyle = "#000000";
+  textCtx.lineWidth = 8;
+  textCtx.strokeText("MENARA BILANGAN", 1024, 256);
+
+  // Gradient fill untuk efek logam/emas
+  const gradient = textCtx.createLinearGradient(0, 200, 0, 312);
+  gradient.addColorStop(0, "#FFD700"); // Emas terang
+  gradient.addColorStop(0.3, "#FFA500"); // Orange emas
+  gradient.addColorStop(0.7, "#FF8C00"); // Orange gelap
+  gradient.addColorStop(1, "#DAA520"); // Emas gelap
+
+  textCtx.fillStyle = gradient;
+  textCtx.fillText("MENARA BILANGAN", 1024, 256);
+
+  // Highlight putih di bagian atas untuk efek mengkilap
+  textCtx.strokeStyle = "#FFFFFF";
+  textCtx.lineWidth = 3;
+  textCtx.globalCompositeOperation = "overlay";
+  textCtx.strokeText("MENARA BILANGAN", 1024, 246);
+  textCtx.globalCompositeOperation = "source-over";
 
   const textTexture = new THREE.CanvasTexture(textCanvas);
+  textTexture.generateMipmaps = false;
+  textTexture.minFilter = THREE.LinearFilter;
+  textTexture.magFilter = THREE.LinearFilter;
+
   const textMaterial = new THREE.MeshBasicMaterial({
     map: textTexture,
     transparent: true,
+    alphaTest: 0.1
   });
 
-  const textGeometry = new THREE.PlaneGeometry(12, 3);
+  // Geometri yang lebih besar untuk teks
+  const textGeometry = new THREE.PlaneGeometry(20, 5); // Diperbesar dari 12x3 ke 20x5
   const textMesh = new THREE.Mesh(textGeometry, textMaterial);
   textMesh.position.set(0, 0.81, -16.5);
   textMesh.rotation.x = -Math.PI / 2;
   scene.add(textMesh);
+
 }
 function createPoleGrid() {
   const poleGeometry = new THREE.CylinderGeometry(0.4, 0.4, 6, 16);
